@@ -3,7 +3,7 @@ import TableRow from './elements/TableRow'
 import Select from './elements/Select'
 
 const Table = ({rates, onChange}) => {
-  console.log("Rates: ", rates)
+
   if (!rates.rates) {return null;}
 
   let currencies = Object.keys(rates.rates);

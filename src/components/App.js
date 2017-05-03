@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import Table from './Table'
+import Graph from './Graph'
 
 class App extends Component {
   constructor() {
@@ -15,15 +16,13 @@ class App extends Component {
 
   componentDidMount() {
     fetch('http://api.fixer.io/latest')
-      .then((response) => response.json())
+      .then((response) => (response.json()))
       .then((json) => {
+        console.log("after then", json)
         this.setState({
           rates: json,
           isFetching: false,
         })
-      })
-      .then( () => {
-        console.log(this.state);
       })
   }
 
@@ -56,6 +55,9 @@ class App extends Component {
         </div>
         <div className="container">
           <Table onChange={this.onChange} rates={this.state.rates} />
+        </div>
+        <div className="container">
+          <Graph />
         </div>
       </div>
     );
