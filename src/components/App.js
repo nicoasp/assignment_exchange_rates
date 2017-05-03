@@ -27,13 +27,36 @@ class App extends Component {
       })
   }
 
+  onChange = (e) => {
+    this.setState({
+      isFetching: true
+    })
+    const newBase = e.target.value;
+    console.log(newBase);
+    
+    fetch(`http://api.fixer.io/latest?base=${newBase}`)
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({
+          rates: json,
+          isFetching: false,
+        })
+      })
+      .then( () => {
+        console.log(this.state);
+      })    
+
+  }
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
           <h2>Exchange Rates</h2>
         </div>
-        <Table rates={this.state.rates} />
+        <div className="container">
+          <Table onChange={this.onChange} rates={this.state.rates} />
+        </div>
       </div>
     );
   }
